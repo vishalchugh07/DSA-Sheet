@@ -1,0 +1,39 @@
+class Trap{
+    
+    // function to find the trapped water in between buildings
+    // arr: input array
+    // n: size of array
+    static int trappingWater(int arr[], int n) { 
+        int mi=0;
+        int mr=0;
+        int l=0,h=n-1;
+        int ans=0;
+        while(l<=h)
+        {
+            if(arr[l]<arr[h])
+            {
+                if(arr[l]>mi)
+                {
+                    mi=arr[l];
+                }
+                else{
+                    ans+=mi-arr[l];
+                }
+                l++;
+            }
+            else{
+                if(arr[h]>mr)
+                {
+                    mr=arr[h];
+                }
+                else
+                {
+                    ans+=mr-arr[h];
+                }
+                h--;
+            }
+        }
+        return ans;
+    } 
+}
+
