@@ -1,0 +1,22 @@
+class GfG
+{
+	public static int palinArray(int[] a, int n)
+           {
+                for (int arr : a)
+                  {
+                      int temp=arr;
+                      int reverse=0;
+                      while(arr>0)
+                      {
+                         int rem =arr%10;
+                         reverse =(reverse*10)+rem;
+                         arr=arr/10;
+                      }
+                      if(temp==reverse)
+                            continue;
+                      else
+                            return 0;
+                  }
+                  return 1;
+           }
+}
