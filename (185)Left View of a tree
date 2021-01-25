@@ -1,0 +1,20 @@
+class Tree
+{
+    Map<Integer,Integer> mp=new TreeMap<>();
+    void dfs(Node root,int h)
+    {   
+        if(root==null)return;
+        if(!mp.containsKey(h))
+        {
+            mp.put(h,root.data);
+        }
+        dfs(root.left,h+1);
+        dfs(root.right,h+1);
+        
+    }
+    ArrayList<Integer> leftView(Node root)
+    {
+     dfs(root,0);
+     return new ArrayList(mp.values());
+    }
+}
