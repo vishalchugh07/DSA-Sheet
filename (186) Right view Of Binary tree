@@ -1,0 +1,19 @@
+class Tree{
+    
+    Map<Integer,Integer> mp=new TreeMap<>();
+    void dfs(Node root,int h)
+    {   
+        if(root==null)return;
+      
+        mp.put(h,root.data);
+        dfs(root.left,h+1);
+        dfs(root.right,h+1);
+        
+    }
+    ArrayList<Integer> rightView(Node root) 
+    {
+    dfs(root,0);
+     return new ArrayList(mp.values());
+    }
+}
+
