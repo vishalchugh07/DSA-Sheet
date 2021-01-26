@@ -1,0 +1,35 @@
+class Pair {
+    int value;
+    int depth;
+    public Pair(int value, int depth) {
+        this.value = value;
+        this.depth = depth;
+    } 
+}
+class Tree
+{
+    public void bottom(Node node, int x, int y, Map<Integer, Pair> map) {
+        if (node == null) {
+            return;
+        }
+        if (!map.containsKey(x) || y >= map.get(x).depth) {
+            map.put(x, new Pair(node.data, y));
+        }
+        bottom(node.left, x - 1, y + 1,  map);
+        bottom(node.right, x + 1, y + 1, map);
+    }
+    // Method that returns the bottom view.
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Map<Integer, Pair> map = new TreeMap<>();
+        bottom(root, 0, 0, map);
+        for (Pair it: map.values()) {
+            result.add(it.value);
+        }
+        return result;
+    }
+}
