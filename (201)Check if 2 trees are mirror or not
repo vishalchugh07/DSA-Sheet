@@ -1,0 +1,151 @@
+
+class Node
+{
+    int value;
+    ArrayList<Node> child;
+    
+    Node(int value)
+    {
+        this.value = value;
+        child = new ArrayList<Node>();
+    }
+}
+
+class GFG {
+    
+     private int checkMirrorInNAryTree(Node root1, Node root2)
+    {
+        if(root1 == null && root2 == null){
+			return 1;
+		}
+		
+		if(root1 == null || root2 == null){
+			return 0;
+		}
+		
+		if(root1.child == null && root2.child != null)
+		{
+			return 0;
+		}
+		
+		if(root1.child != null && root2.child == null)
+		{
+			return 0;
+		}
+		
+        if(root1.value != root2.value || root1.child.size() != root2.child.size())
+        {
+            return 0;
+        }
+        
+        int n = root1.child.size();
+        
+        if(n == 0)
+        {
+            return 1;
+        }
+        int i , j;
+        for(i = 0, j = n - 1; i < n && j >= 0; i++, j--)
+        {
+            if(checkMirrorInNAryTree(root1.child.get(i), root2.child.get(j)) == 0)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    
+	public static void main (String[] args) {
+		//code
+		GFG gfg = new GFG();
+		Scanner sc = new Scanner(System.in);
+		int testCases, n, e, u, v;
+		
+		testCases = sc.nextInt();
+		
+		for(int i = 0; i < testCases; i++)
+		{
+			Node node, root1, root2;
+		    HashMap<Integer, Node> h = new HashMap<Integer, Node>();
+		    HashMap<Integer, Node> h2 = new HashMap<Integer, Node>();
+		    
+		    node = null;
+		    root1 = null;
+		    root2 = null;
+		    
+		    n = sc.nextInt();
+		    e = sc.nextInt();
+		    
+		    for(int j = 0; j < e; j++)
+		    {
+		        u = sc.nextInt();
+		        v = sc.nextInt();
+		        
+		        if(!h.containsKey(u))
+		        {
+		            if(root1 == null)
+		            {
+		                root1 = new Node(u); 
+		                h.put(u, root1);
+		            }
+		            else
+		            {
+		              node = new Node(u);
+		              h.put(u, node);
+		            }
+		        }
+		        else
+		        {
+		            node = h.get(u);
+		        }
+		        
+		        if(!h.containsKey(v))
+		        {
+		            h.put(v, new Node(v));
+		        }
+		        if(node != null)
+		           node.child.add(h.get(v));
+		        else
+		        	root1.child.add(h.get(v));	
+		    }
+		    
+		    node = null;
+		    for(int j = 0; j < e; j++)
+		    {
+		        u = sc.nextInt();
+		        v = sc.nextInt();
+		        
+		        if(!h2.containsKey(u))
+		        {
+		            if(root2 == null)
+		            {
+		                root2 = new Node(u); 
+		                h2.put(u, root2);
+		            }
+		            else
+		            {
+		              node = new Node(u);
+		              h2.put(u, node);
+		            }
+		        }
+		        else
+		        {
+		            node = h2.get(u);
+		        }
+		        
+		        if(!h2.containsKey(v))
+		        {
+		            h2.put(v, new Node(v));
+		        }
+		        if(node != null)
+		        node.child.add(h2.get(v));
+		        else
+		        	root2.child.add(h2.get(v));
+		    }
+		    
+		    System.out.println(gfg.checkMirrorInNAryTree(root1, root2));
+		}
+		
+	}
+}
