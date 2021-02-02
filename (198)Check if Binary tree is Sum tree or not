@@ -1,0 +1,37 @@
+class Tree
+{
+    int f=1;
+    int solve(Node root)
+    {
+        if(root==null){
+            return 0;
+        }
+        if(root.left==null && root.right==null)
+        {
+            return root.data;
+        }
+        if(f==0)
+        {
+            return 0;
+        }
+        int a=solve(root.left);
+        int b=solve(root.right);
+        if(a+b!=root.data)
+        {
+            f=0;
+        }
+        return a+b+root.data;
+    }
+	boolean isSumTree(Node root)
+	{
+            f=1;
+            solve(root);
+            if(f==1)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+	}
+}
