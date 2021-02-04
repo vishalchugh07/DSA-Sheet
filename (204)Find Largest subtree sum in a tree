@@ -1,0 +1,50 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class Node{
+    int data;
+    Node left,right;
+    
+    public Node(int item)
+    {
+        this.data=item;
+        left=null;
+        right=null;
+    }
+}
+class GFG {
+    static Node root;
+    public GFG(int key)
+    {
+        root=new Node(key);
+    }
+    public GFG(){
+        root=null;
+    }
+    static int sumTree(Node root)
+    {
+        int mx=Integer.MIN_VALUE;
+        if(root==null)
+        {
+            return 0;
+        }
+        int a=sumTree(root.left);
+        int b=sumTree(root.right);
+        mx=Math.max(mx,a+b+root.data);
+        return a+b+root.data;
+    }
+    public static void main (String[] args) {
+		GFG g=new GFG();
+		g.root=new Node(1);
+		g.root.left=new Node(2);
+		g.root.right=new Node(3);
+		g.root.left.left=new Node(4);
+		g.root.left.right=new Node(5);
+		g.root.right.left=new Node(6);
+		g.root.right.right=new Node(7);
+		System.out.println(g.sumTree(root));
+			
+	}
+}
