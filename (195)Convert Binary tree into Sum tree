@@ -2,6 +2,7 @@ class Tree{
     public void toSumTree(Node root){
          solve(root);
     }
+    
     int solve(Node root)
     {
         if(root==null)
