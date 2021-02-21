@@ -19,7 +19,8 @@ class Solution
 	        res.add(root.data);
 	        leftBdr(root.left,res);
 	    }
-	    else if(root.right != null){
+	    else if(root.right != null)
+	    {
 	        res.add(root.data);
 	        leftBdr(root.right,res);
 	    }
